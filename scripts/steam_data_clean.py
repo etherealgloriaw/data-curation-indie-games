@@ -2,25 +2,28 @@
 import ast
 import re
 import pandas as pd
+from datetime import datetime
+from currency_converter import CurrencyConverter
 
 # ---------- Hard-coded paths ----------
 INPUT_CSV  = "steam_raw.csv"
-OUTPUT_CSV = "steam_clean.csv"
+OUTPUT_CSV = "steam_clean5.csv"
 # -------------------------------------
 
 YEAR_MIN = 2015
 YEAR_MAX = 2025
 YEAR_RE  = re.compile(r"\b(\d{4})\b")
 
+def parse_date(s):
+    s = (s or "").strip()
+    for fmt in ("%d %b, %Y", "%b %d, %Y", "%d %B, %Y", "%B %d, %Y"):
+        try:
+            return datetime.strptime(s, fmt).strftime("%Y-%m-%d")
+        except:
+            pass
+    return None
+
 def extract_date_string(cell):
-    """
-    Extract the raw human-readable date string from release_date without converting format.
-    Examples:
-      - "{'coming_soon': False, 'date': '4 Jun, 2016'}" -> "4 Jun, 2016"
-      - "{'coming_soon': True, 'date': '4 Jun, 2016'}"  -> None (skip)
-      - "Nov 1, 2000"                                   -> "Nov 1, 2000"
-      - "2016-06-04"                                    -> "2016-06-04"
-    """
     if cell is None or (isinstance(cell, float) and pd.isna(cell)):
         return None
 
@@ -31,8 +34,11 @@ def extract_date_string(cell):
         if isinstance(obj, dict):
             if obj.get("coming_soon") is True:
                 return None
-            return (obj.get("date") or "").strip() or None
-    except Exception:
+            raw = (obj.get("date") or "").strip()
+            date_str = parse_date(raw)
+            return date_str or None
+    except Exception as e:
+        print(e)
         pass  # not a dict; fall through
 
     return s or None
@@ -53,7 +59,7 @@ def year_in_range_from_string(date_str):
     except Exception:
         return False
 
-def genres_to_text(cell):
+def dict_to_text(cell):
     """
     "[{'id': '1', 'description': 'Action'}, ...]" -> "Action|Adventure|..."
     """
@@ -97,13 +103,16 @@ def parse_price_overview(cell):
         if isinstance(dct, dict):
             currency_code = str(dct.get("currency", "")).strip()
             discount_percent = coerce_int_or_empty(dct.get("discount_percent"))
-            final_price = str(dct.get("final_formatted", "")).strip()
+            raw_price = str(dct.get("final_formatted", "")).strip()
+            final_price = re.sub(r"[^0-9.]", "", raw_price)
+
     except Exception:
         pass
     return currency_code, discount_percent, final_price
 
 def main():
     # Read all as strings; keep blanks as ""
+    currency_converter = CurrencyConverter()
     df = pd.read_csv(INPUT_CSV, dtype=str, keep_default_na=False)
 
     # Drop rows with blank/null-like is_free
@@ -120,10 +129,31 @@ def main():
 
     # Filter by year 2015..2025 based on the year number present in the string
     df = df[df["effective_date"].apply(year_in_range_from_string)].copy()
+    df.drop(columns=["release_date"], inplace=True)
+    df.drop(columns=["recommendations"], inplace=True)
+    df.drop(columns=["platforms"], inplace=True)
 
     # genres -> description-only joined with "|"
     if "genres" in df.columns:
-        df["genres"] = df["genres"].apply(genres_to_text)
+        df["genres"] = df["genres"].apply(dict_to_text)
+
+    if "categories" in df.columns:
+        df["categories"] = df["categories"].apply(dict_to_text)
+
+    if "platforms" in df.columns:
+        df["platforms"] = df["platforms"].apply(dict_to_text)
+
+    def safe_convert(r):
+        try:
+            cur = r["currency_code"]
+            price = r["final_price"]
+            if price is not None and cur and cur != "USD":
+                res = currency_converter.convert(price, cur, "USD")
+                return round(res, 2)
+            return price
+        except Exception as e:
+            # print(e)
+            return None
 
     # price_overview -> currency_code, discount_percent, final_price
     if "price_overview" in df.columns:
@@ -132,6 +162,8 @@ def main():
         df["discount_percent"] = list(dp)
         df["final_price"] = list(fp)
         df.drop(columns=["price_overview"], inplace=True)
+        df["final_price_usd"] = df.apply(safe_convert, axis=1)
+
 
     # Write out
     df.to_csv(OUTPUT_CSV, index=False)

@@ -5,7 +5,7 @@ from datetime import datetime
 
 # ---------- HARD-CODED PATHS ----------
 INPUT_PATH  = Path(r"epic_games_all.json")   # change if needed
-OUTPUT_PATH = Path(r"epic_games_clean6.csv")    # change if needed
+OUTPUT_PATH = Path(r"epic_games_clean7.csv")    # change if needed
 # --------------------------------------
 
 # Tag ID -> human-readable label
@@ -40,7 +40,7 @@ def extract_row(item: dict) -> dict:
             lbl = TAG_ID_TO_LABEL.get(str(t["id"]))
             if lbl:
                 labels.append(lbl)
-    tagss_joined = "|".join(labels)
+    tags_joined = "|".join(labels)
 
     # customAttributes: keep keys where value is true/"true"
     true_keys = []
@@ -59,17 +59,13 @@ def extract_row(item: dict) -> dict:
 
     return {
         "title": item.get("title"),
-        "id": item.get("id"),
-        "effectiveDate": item.get("effectiveDate"),
-        "description": item.get("description"),
-        "seller_id": (item.get("seller") or {}).get("id"),
+        "effective_date": item.get("effectiveDate"),
         "seller_name": (item.get("seller") or {}).get("name"),
-        "tagss_joined": tagss_joined,
-        "customAttributes": custom_true_joined,
-        "originalPrice": fmt.get("originalPrice"),
-        "discountPrice": fmt.get("discountPrice"),
-        "intermediatePrice": fmt.get("intermediatePrice"),
-        "currencyCode": tp.get("currencyCode"),
+        "tags_joined": tags_joined,
+        "original_price": fmt.get("originalPrice"),
+        "discount_price": fmt.get("discountPrice"),
+        "intermediate_price": fmt.get("intermediatePrice"),
+        "currency_code": tp.get("currencyCode"),
     }
 
 # ---------- load JSON (object or list) ----------
@@ -80,13 +76,25 @@ if isinstance(data, dict):
 
 rows = [extract_row(obj) for obj in data]
 df = pd.DataFrame(rows)
-df = df[df["effectiveDate"].apply(valid_year)]
+df = df[df["effective_date"].apply(valid_year)]
+
+# convert date format
+df["effective_date"] = pd.to_datetime(df["effective_date"], utc=True).dt.strftime("%Y-%m-%d")
+
+# make price column display numeric value
+df["original_price"] = df["original_price"].str.replace("$", "", regex=False)
+df["discount_price"] = df["discount_price"].str.replace("$", "", regex=False)
+df["intermediate_price"] = df["intermediate_price"].str.replace("$", "", regex=False)
 
 df = df[[
-    "title","id","effectiveDate","description",
-    "seller_id","seller_name",
-    "tagss_joined","customAttributes",
-    "originalPrice","discountPrice","intermediatePrice","currencyCode"
+    "title",
+    "effective_date",
+    "seller_name",
+    "tags_joined",
+    "original_price",
+    "discount_price",
+    "intermediate_price",
+    "currency_code"
 ]]
 
 df.to_csv(OUTPUT_PATH, index=False, encoding="utf-8")
