@@ -4,8 +4,8 @@ from pathlib import Path
 from datetime import datetime
 
 # ---------- HARD-CODED PATHS ----------
-INPUT_PATH  = Path(r"epic_games_all.json")   # change if needed
-OUTPUT_PATH = Path(r"epic_games_clean7.csv")    # change if needed
+INPUT_PATH  = Path(r"./data/bronze/epic/epic_games_all.json")   # change if needed
+OUTPUT_PATH = Path(r"./data/silver/epic_games_clean_new.csv")    # change if needed
 # --------------------------------------
 
 # Tag ID -> human-readable label
@@ -85,6 +85,10 @@ df["effective_date"] = pd.to_datetime(df["effective_date"], utc=True).dt.strftim
 df["original_price"] = df["original_price"].str.replace("$", "", regex=False)
 df["discount_price"] = df["discount_price"].str.replace("$", "", regex=False)
 df["intermediate_price"] = df["intermediate_price"].str.replace("$", "", regex=False)
+
+df['original_price'] = pd.to_numeric(df['original_price'], errors='coerce')
+df['discount_price'] = pd.to_numeric(df['discount_price'], errors='coerce')
+df['intermediate_price'] = pd.to_numeric(df['intermediate_price'], errors='coerce')
 
 df = df[[
     "title",

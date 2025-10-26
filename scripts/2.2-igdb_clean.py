@@ -2,8 +2,8 @@ import json
 import pandas as pd
 from datetime import datetime
 
-INPUT_PATH = "igdb_pc_games.json"
-OUTPUT_PATH = "igdb_clean2.csv"
+INPUT_PATH = "./data/bronze/igdb/igdb_pc_games.json"
+OUTPUT_PATH = "./data/silver/igdb_clean_new.csv"
 
 def unix_to_date(ts):
     try:
@@ -28,7 +28,7 @@ df["name"] = df["name"].fillna("").str.strip()
 df["genres"] = df["genres"].apply(extract_genre_names)
 df["release_date"] = df["first_release_date"].apply(unix_to_date)
 
-# ---- Filter 2015–2025 ----
+# ---- Filter 2015-2025 ----
 df = df.dropna(subset=["release_date"])
 df["year"] = df["release_date"].str[:4].astype(int)
 df = df[(df["year"] >= 2015) & (df["year"] <= 2025)]
