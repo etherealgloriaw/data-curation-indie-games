@@ -1,0 +1,5 @@
+| Column Name      | Data Type            | Description                                                                           |
+| ---------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| **name**         | object (string)      | Name/title of the game or product.                                                    |
+| **genres**       | object (string/list) | Genre classification(s), e.g., “Action, RPG”. May be a list or a comma-joined string. |
+| **release_date** | datetime64[ns]       | Official release date of the game (converted to pandas datetime).                     |
