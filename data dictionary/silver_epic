@@ -1,0 +1,10 @@
+| Column Name            | Data Type       | Description                                                             |
+| ---------------------- | --------------- | ----------------------------------------------------------------------- |
+| **title**              | object (string) | Product or game title.                                                  |
+| **effective_date**     | datetime64[ns]  | Effective date for the record or pricing (ISO timestamp).               |
+| **seller_name**        | object (string) | Name of the seller or publisher on the platform.                        |
+| **tags_joined**        | object (string) | Combined/flattened tags associated with the product (comma-separated).  |
+| **original_price**     | float64         | Original price before discounts.                                        |
+| **discount_price**     | float64         | Final price after discount is applied.                                  |
+| **intermediate_price** | float64         | Additional intermediate price (if platform has multi-tier price logic). |
+| **currency_code**      | object (string) | ISO 4217 currency code (e.g., "USD", "EUR").                            |
