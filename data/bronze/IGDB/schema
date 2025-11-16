@@ -1,2 +1,40 @@
 https://api-docs.igdb.com/#examples
-contains 2010-2025 data
+
+
+{
+  "meta": {
+    "platform_id": "int",
+    "platform_label": "str",
+    "total_release_rows": "int",
+    "unique_game_ids": "int"
+  },
+  "games": [
+    {
+      "id": "int",
+      "cover": {
+        "id": "int",
+        "image_id": "str",
+        "url": "str"
+      },
+      "first_release_date": "int",
+      "genres": [
+        {
+          "id": "int",
+          "name": "str"
+        }
+      ],
+      "name": "str",
+      "platforms": [
+        "int"
+      ],
+      "slug": "str",
+      "summary": "str",
+      "websites": [
+        {
+          "id": "int",
+          "url": "str"
+        }
+      ]
+    }
+  ]
+}

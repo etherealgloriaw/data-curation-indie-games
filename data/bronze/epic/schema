@@ -1,2 +1,71 @@
 API reference
 https://epicstore-api.readthedocs.io/en/latest/api.html#epicstore_api.api.EpicGamesStoreAPI.fetch_store_games
+
+JSON schema
+[
+  {
+    "title": "str",
+    "id": "str",
+    "namespace": "str",
+    "description": "str",
+    "effectiveDate": "str",
+    "keyImages": [
+      {
+        "type": "str",
+        "url": "str"
+      }
+    ],
+    "seller": {
+      "id": "str",
+      "name": "str"
+    },
+    "productSlug": "NoneType",
+    "urlSlug": "str",
+    "url": "NoneType",
+    "tags": [
+      {
+        "id": "str"
+      }
+    ],
+    "items": [
+      {
+        "id": "str",
+        "namespace": "str"
+      }
+    ],
+    "customAttributes": [
+      {
+        "key": "str",
+        "value": "str"
+      }
+    ],
+    "categories": [
+      {
+        "path": "str"
+      }
+    ],
+    "price": {
+      "totalPrice": {
+        "discountPrice": "int",
+        "originalPrice": "int",
+        "voucherDiscount": "int",
+        "discount": "int",
+        "currencyCode": "str",
+        "currencyInfo": {
+          "decimals": "int"
+        },
+        "fmtPrice": {
+          "originalPrice": "str",
+          "discountPrice": "str",
+          "intermediatePrice": "str"
+        }
+      },
+      "lineOffers": [
+        {
+          "appliedRules": "list"
+        }
+      ]
+    }
+  }
+]
+
