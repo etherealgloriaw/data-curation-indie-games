@@ -1,0 +1,65 @@
+Steam_store
+| Column Name                 | Data Type | Description                                                      |
+| --------------------------- | --------- | ---------------------------------------------------------------- |
+| **type**                    | string    | Type of record (often `"game"` or category marker in Steam API). |
+| **name**                    | string    | Official game title.                                             |
+| **steam_appid**             | float64   | Unique Steam application ID.                                     |
+| **required_age**            | float64   | Minimum age required to play (e.g., 0, 18).                      |
+| **is_free**                 | string    | Whether the game is free to play (`"true"` / `"false"`).         |
+| **controller_support**      | string    | Controller support level (e.g., `"full"`, `"partial"`).          |
+| **dlc**                     | string    | List of downloadable content appids.                             |
+| **detailed_description**    | string    | Full HTML-rich description of the game.                          |
+| **about_the_game**          | string    | Condensed overview of game features.                             |
+| **short_description**       | string    | Short summary for store listings.                                |
+| **fullgame**                | string    | Information about the full game package (for demos).             |
+| **supported_languages**     | string    | Languages supported, may include formatting tags.                |
+| **header_image**            | string    | URL of the game's header/banner image.                           |
+| **website**                 | string    | Official website of the game or developer.                       |
+| **pc_requirements**         | string    | Minimum/recommended PC system requirements (HTML).               |
+| **mac_requirements**        | string    | macOS system requirements.                                       |
+| **linux_requirements**      | string    | Linux / SteamOS system requirements.                             |
+| **legal_notice**            | string    | Copyright or legal disclaimers.                                  |
+| **drm_notice**              | string    | DRM–related information if applicable.                           |
+| **ext_user_account_notice** | string    | Requirements for external user accounts (e.g., Ubisoft).         |
+| **developers**              | string    | Developer names (may be multiple).                               |
+| **publishers**              | string    | Publisher names (may be multiple).                               |
+| **demos**                   | string    | Demo appids or objects.                                          |
+| **price_overview**          | string    | Pricing object (currency, final price, discount).                |
+| **packages**                | string    | List of package IDs associated with the product.                 |
+| **package_groups**          | string    | Purchase group information (bundle definitions).                 |
+| **platforms**               | string    | Platform availability (Windows/Mac/Linux booleans).              |
+| **metacritic**              | string    | Metacritic score and URL.                                        |
+| **reviews**                 | string    | User-written review snippets.                                    |
+| **categories**              | string    | Steam-defined categories (e.g., Single-player).                  |
+| **genres**                  | string    | Game genre list (e.g., Action, RPG).                             |
+| **screenshots**             | string    | Screenshot URLs and metadata.                                    |
+| **movies**                  | string    | Trailer and video metadata.                                      |
+| **recommendations**         | string    | Total recommendations count.                                     |
+| **achievements**            | string    | Achievement stats (total, highlighted).                          |
+| **release_date**            | object    | Release date object (with `"coming_soon"` flag).                 |
+| **support_info**            | string    | Support email/URL.                                               |
+| **background**              | string    | Store page background image URL.                                 |
+| **content_descriptors**     | string    | Age/violence content descriptor metadata.                        |
+
+
+Steam_spy_all_data
+| Column Name         | Data Type | Description                                          |
+| ------------------- | --------- | ---------------------------------------------------- |
+| **Unnamed: 0**      | int64     | Index column (often auto-generated when saving CSV). |
+| **appid**           | int64     | Unique Steam application ID.                         |
+| **name**            | string    | Game name.                                           |
+| **developer**       | string    | Developer of the game.                               |
+| **publisher**       | string    | Publisher of the game.                               |
+| **score_rank**      | float64   | Rank derived from positive/negative reviews.         |
+| **positive**        | int64     | Number of positive user reviews.                     |
+| **negative**        | int64     | Number of negative user reviews.                     |
+| **userscore**       | int64     | User score metric assigned by SteamDB.               |
+| **owners**          | string    | Estimated ownership range (e.g., “20000–50000”).     |
+| **average_forever** | int64     | Average playtime (minutes) since release.            |
+| **average_2weeks**  | int64     | Average playtime (minutes) in last 2 weeks.          |
+| **median_forever**  | int64     | Median playtime (minutes) since release.             |
+| **median_2weeks**   | int64     | Median playtime (minutes) in last 2 weeks.           |
+| **price**           | float64   | Current price in the lowest region (e.g., USD).      |
+| **initialprice**    | float64   | Original full price before discounts.                |
+| **discount**        | float64   | Discount rate (e.g., 0.2 = 20% off).                 |
+| **ccu**             | int64     | Current concurrent users.                            |
