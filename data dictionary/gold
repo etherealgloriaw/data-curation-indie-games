@@ -1,0 +1,16 @@
+| Column Name                | Data Type            | Description                                                   |
+| --------------------       | -------------------- | -------------------------------------------------             |
+| **ID**                     | IDENTITY()           | identity ID of the game.                                      |
+| **title**                  | string               | Title of the game.                                            |
+| **platform**               | list<string>         | The platform the row originates from: "steam", "epic", "igdb".|
+| **developers**             | string               | Developer(s) of the game.                                     |
+| **publishers**             | string               | Publisher(s) of the game.                                     |
+| **categories_steam**       | list<string>         | Steam categories associated with the game.                    |
+| **categories_epic**        | list<string>         | EPIC categories associated with the game.                     |
+| **categories_igdb**        | list<string>         | igdb categories associated with the game.                     |
+| **effective_date_steam**   | datetime64[ns]       | Date when the record or pricing became effective on steam.    |
+| **effective_date_epic**    | datetime64[ns]       | Date when the record or pricing became effective on epic.     |
+| **effective_date_igdb**    | datetime64[ns]       | Date when the record or pricing became effective on IGDB.     |
+| **price_steam**            | float64              | Original price before discount in steam.                      |
+| **price_epic**             | float64               | Original price before discount in epic.                       |
+| **discount_percent**       | float64              | Discount percentage (e.g., 0.30 = 30% off).                   |
