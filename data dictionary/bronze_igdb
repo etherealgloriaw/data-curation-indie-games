@@ -1,0 +1,11 @@
+| Field                  | Type          | Description                                          |
+| ---------------------- | ------------- | ---------------------------------------------------- |
+| **id**                 | int           | Unique IGDB game ID.                                 |
+| **cover**              | Cover         | Metadata for the game's cover image.                 |
+| **first_release_date** | int           | Unix timestamp for the game's first release.         |
+| **genres**             | list<Genre>   | List of genre objects associated with the game.      |
+| **name**               | str           | Official game title.                                 |
+| **platforms**          | list<int>     | Platform IDs on which the game is available.         |
+| **slug**               | str           | URL-friendly identifier for the game (used by IGDB). |
+| **summary**            | str           | Short description or overview of the game.           |
+| **websites**           | list<Website> | List of websites associated with the game.           |
