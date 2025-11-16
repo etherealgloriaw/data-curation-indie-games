@@ -1,0 +1,17 @@
+| Field                | Type                  | Description                                       |
+| -------------------- | --------------------- | ------------------------------------------------- |
+| **title**            | string                | Title of the product.                             |
+| **id**               | string                | Unique identifier for the product.                |
+| **namespace**        | string                | Namespace grouping for Epic catalog items.        |
+| **description**      | string                | Product description text.                         |
+| **effectiveDate**    | string                | Release date or last update date (ISO-8601).      |
+| **keyImages**        | list<KeyImage>        | List of images representing the product.          |
+| **seller**           | Seller                | Seller information (Epic store partner).          |
+| **productSlug**      | NoneType              | URL-friendly identifier (may be null).            |
+| **urlSlug**          | string                | Store page URL slug.                              |
+| **url**              | NoneType              | Store page full URL (may be null).                |
+| **tags**             | list<Tag>             | List of tags for categorization.                  |
+| **items**            | list<Item>            | Catalog items included in the product.            |
+| **customAttributes** | list<CustomAttribute> | Developer-defined key/value metadata.             |
+| **categories**       | list<Category>        | Categorization paths.                             |
+| **price**            | Price                 | Pricing, formatted price, and discount breakdown. |
