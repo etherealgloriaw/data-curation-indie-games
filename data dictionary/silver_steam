@@ -1,0 +1,13 @@
+| Column Name          | Data Type            | Description                                       |
+| -------------------- | -------------------- | ------------------------------------------------- |
+| **title**            | object (string)      | Title of the game.                                |
+| **is_free**          | bool                 | Indicates whether the game is free to play.       |
+| **developers**       | object (string/list) | Developer(s) of the game.                         |
+| **publishers**       | object (string/list) | Publisher(s) of the game.                         |
+| **categories**       | object (string/list) | Steam/Epic categories associated with the game.   |
+| **genres**           | object (string/list) | Genre classifications (e.g., Action, RPG).        |
+| **effective_date**   | datetime64[ns]       | Date when the record or pricing became effective. |
+| **currency_code**    | object (string)      | ISO 4217 currency code (e.g., "USD").             |
+| **discount_percent** | float64              | Discount percentage (e.g., 0.30 = 30% off).       |
+| **final_price**      | float64              | Final game price in native currency.              |
+| **final_price_usd**  | float64              | Final game price converted to USD.                |
