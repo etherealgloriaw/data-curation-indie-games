@@ -1,5 +1,6 @@
 | Column Name      | Data Type            | Description                                                                           |
 | ---------------- | -------------------- | ------------------------------------------------------------------------------------- |
+| **id**           | string               | identity ID of the game in igdb.                                                      |
 | **name**         | object (string)      | Name/title of the game or product.                                                    |
-| **genres**       | object (string/list) | Genre classification(s), e.g., “Action, RPG”. May be a list or a comma-joined string. |
+| **genres**       | object (string/list) | Genre classification(s) |
 | **release_date** | datetime64[ns]       | Official release date of the game (converted to pandas datetime).                     |

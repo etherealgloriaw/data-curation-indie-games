@@ -1,5 +1,6 @@
 | Column Name            | Data Type       | Description                                                             |
 | ---------------------- | --------------- | ----------------------------------------------------------------------- |
+| **id**                 | string          | identity ID of the game in epic.                                        |
 | **title**              | object (string) | Product or game title.                                                  |
 | **effective_date**     | datetime64[ns]  | Effective date for the record or pricing (ISO timestamp).               |
 | **seller_name**        | object (string) | Name of the seller or publisher on the platform.                        |
