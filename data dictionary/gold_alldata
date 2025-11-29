@@ -19,3 +19,4 @@
 | **price_epic**             | float64              | Original price before discount in epic.                       |
 | **discount_percent_steam** | float64              | Discount percentage (e.g., 0.30 = 30% off).                   |
 | **discount_percent_epic**  | float64              | Discount percentage (e.g., 0.30 = 30% off).                   |
+
