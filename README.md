@@ -63,9 +63,7 @@ pip install -r requirements.txt
 
    This is the Exploratory Data Analysis for bronze layer data we just collected from steam, epic and igdb. It's optional in the whole workflow and shows the raw schema for the bronze layer.
 
-   ## 2.1-steam_data_clean.ipynb
-   ## 2.2-epic_data_clean.ipynb
-   ## 2.3-igdb-data-clean.ipynb
+   ## 2.1-steam_data_clean.ipynb, 2.2-epic_data_clean.ipynb, 2.3-igdb-data-clean.ipynb
 
    The 3 cleaning scripts flatten the nested JSON and remove the unused columns and out-of-scope time range data from bronze layer data. You can follow the script one by one or modifying the script to add any columns you want to keep.
 
@@ -81,11 +79,7 @@ pip install -r requirements.txt
 
    This script split the indie/non indie game from the file we deduced from 3.1.
 
-   ## 3.3-indie-game-analysis-price.ipynb
-   ## 3.4-indie-game-analysis-platform.ipynb
-   ## 3.5-indie-game-analysis-genre.ipynb
-   ## 3.6-indie-game-analysis-publisher.ipynb
-   ## 3.7-indie-game-analysis-trend.ipynb
+   ## 3.3-indie-game-analysis-price.ipynb, 3.4-indie-game-analysis-platform.ipynb, 3.5-indie-game-analysis-genre.ipynb, 3.6-indie-game-analysis-publisher.ipynb, 3.7-indie-game-analysis-trend.ipynb
 
    The example analysis for the data we get above. 
 
