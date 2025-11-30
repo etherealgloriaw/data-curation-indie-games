@@ -19,6 +19,9 @@ OS/Arch: linux/amd64
 | epicstore_api      | 0.2     |
 | requests           | 2.32.5  |
 | currencyconverter  | 0.8.12  |
+| ipython            | 8.12.3  |
+| matplotlib         | 3.10.7  |
+
 
 ---
 
