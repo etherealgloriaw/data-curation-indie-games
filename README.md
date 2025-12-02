@@ -19,6 +19,9 @@ OS/Arch: linux/amd64
 | epicstore_api      | 0.2     |
 | requests           | 2.32.5  |
 | currencyconverter  | 0.8.12  |
+| ipython            | 8.12.3  |
+| matplotlib         | 3.10.7  |
+
 
 ---
 
@@ -29,6 +32,10 @@ OS/Arch: linux/amd64
 pip install -r requirements.txt
 ```
 2. Click Run All for the jupyter noteboooks in the scripts folder, following the order of number in names.
+
+   ## 1.0.5-data-collection-steam-incremental(optional).ipynb
+
+   This one is optionally running for get the incremental refresh for steam data. Because full downloading would take a long time, we provide the option to find the difference in steam_spy_id_name by comparing the existing one to the new downloading one, and then you can jump to 1.1-data-collection-steam.ipynb and directly use the incremental list to download the newest data instead of whole data reloading from steamstore api.
    
    ## 1.1-data-collection-steam.ipynb
 
@@ -42,7 +49,7 @@ pip install -r requirements.txt
 
    ## 1.2-data-collection-epic.ipynb
 
-   This script would dump all data from epic store api to a json file. The average fetching time is 3 minutes.
+   This script would dump all data from epic store api to a json file. The average fetching time is a couple of minutes.
 
    ## 1.3-data-collection-igdb.ipynb
 
@@ -54,6 +61,30 @@ pip install -r requirements.txt
    start = int(dt.datetime(2015,1,1).timestamp())
    end   = int(dt.datetime(2025,12,31,23,59,59).timestamp())
      ```
+
+   ## 1.4-bronze-data-EDA.ipynb
+
+   This is the Exploratory Data Analysis for bronze layer data we just collected from steam, epic and igdb. It's optional in the whole workflow and shows the raw schema for the bronze layer.
+
+   ## 2.1-steam_data_clean.ipynb, 2.2-epic_data_clean.ipynb, 2.3-igdb-data-clean.ipynb
+
+   The 3 cleaning scripts flatten the nested JSON and remove the unused columns and out-of-scope time range data from bronze layer data. You can follow the script one by one or modifying the script to add any columns you want to keep.
+
+   ## 2.4-descriptive-statistics.ipynb
+
+   This script is running some data quality checks to compare pre-2015 and post-2025 data.
+
+   ## 3.1-unify-gold-layer.ipynb
+
+   This script integrates all silver layer data to one file.
+
+   ## 3.2-indie-game-split.ipynb
+
+   This script split the indie/non indie game from the file we deduced from 3.1.
+
+   ## 3.3-indie-game-analysis-price.ipynb, 3.4-indie-game-analysis-platform.ipynb, 3.5-indie-game-analysis-genre.ipynb, 3.6-indie-game-analysis-publisher.ipynb, 3.7-indie-game-analysis-trend.ipynb
+
+   The example analysis for the data we get above. 
 
 ---
 
