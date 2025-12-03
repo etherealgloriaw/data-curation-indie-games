@@ -84,7 +84,31 @@ pip install -r requirements.txt
 
    ## 3.3-indie-game-analysis-price.ipynb, 3.4-indie-game-analysis-platform.ipynb, 3.5-indie-game-analysis-genre.ipynb, 3.6-indie-game-analysis-publisher.ipynb, 3.7-indie-game-analysis-trend.ipynb
 
-   The example analysis for the data we get above. 
+   The example analysis for the data we get above.
+   
+   Price Analysis:
+   
+    Compare price distributions across platforms, examine discount depth/frequency, and contrast indie vs. non-indie pricing behavior.
+
+
+   Platform Analysis:
+   
+    Explore differences in market coverage (Steam/Epic/IGDB), exclusivity, and platform-specific characteristics such as popularity indicators, categories, and review volumes.
+
+
+   Genre Analysis:
+   
+    Clean and standardize noisy genre labels, compute genre frequencies, and investigate which genres dominate indie vs. mainstream titles.
+
+
+   Publisher Analysis:
+   
+    Identify top indie publishers, analyze publisher specialization, pricing strategies, and evaluate cross-platform presence.
+
+
+   Trend Analysis:
+   
+    Use effective_date fields to study temporal patterns in releases, pricing, discounting, and shifting genre popularity over time.
 
 ---
 
