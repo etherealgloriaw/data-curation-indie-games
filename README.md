@@ -94,20 +94,209 @@ pip install -r requirements.txt
 {
   "@context": "https://schema.org/",
   "@type": "Dataset",
-  "name": "Curated Indie Game Dataset (2015-2025)",
-  "description": "A cleaned and harmonized dataset of indie game metadata from Steam, Epic Games Store, and IGDB.",
-  "creator": [
-    {"@type": "Person", "name": "Gloria Wang"},
-    {"@type": "Person", "name": "Meihui Li"}
+  "schemaVersion": "https://schema.org/version/15.0",
+  "name": "Curated Indie Game Dataset (2015–2025)",
+  "alternateName": "Indie Games Metadata: Steam, Epic Games Store, IGDB",
+  "description": "Cleaned and harmonized indie game metadata aggregated from Steam, Epic Games Store, and IGDB. The dataset focuses on PC titles and includes identifiers, pricing and discount history (when available), genres, platforms, publishers/developers, release dates suitable for longitudinal analysis.",
+  "url": "https://github.com/etherealgloriaw/data-curation-indie-games",
+  "identifier": [
+    {
+      "@type": "PropertyValue",
+      "propertyID": "URL",
+      "value": "https://github.com/etherealgloriaw/data-curation-indie-games"
+    }
   ],
+  "keywords": [
+    "indie games",
+    "video games",
+    "pricing",
+    "discounts",
+    "genre",
+    "Steam",
+    "Epic Games Store",
+    "IGDB",
+    "datasets",
+    "data curation"
+  ],
+  "inLanguage": "en",
+  "license": "https://creativecommons.org/licenses/by/4.0/",
+  "isAccessibleForFree": true,
   "temporalCoverage": "2015-01-01/2025-12-31",
-  "license": "CC BY 4.0",
-  "keywords": ["indie games", "pricing", "genre", "popularity"],
-  "distribution": {
-    "@type": "DataDownload",
-    "contentUrl": "https://github.com/etherealgloriaw/data-curation-indie-games",
-    "encodingFormat": "CSV"
-  },
-  "variableMeasured": []
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Gloria Wang"
+    },
+    {
+      "@type": "Person",
+      "name": "Meihui Li"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Organization",
+      "name": "Steam (Steam Web API & SteamSpy)"
+    },
+    {
+      "@type": "Organization",
+      "name": "Epic Games Store API"
+    },
+    {
+      "@type": "Organization",
+      "name": "IGDB"
+    }
+  ],
+  "measurementTechnique": [
+    "API-based extraction (Steam Web API, SteamSpy, Epic Games Store API, IGDB REST API)",
+    "Medallion architecture (bronze/silver/gold) ETL with documented provenance",
+    "Incremental refresh strategies for source updates"
+  ],
+   "variableMeasured": [
+     {
+       "@type": "PropertyValue",
+       "name": "ID",
+       "description": "Internal identity ID of the game (IDENTITY()).",
+       "valueType": "integer"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "steam_ID",
+       "description": "Identity ID of the game in Steam.",
+       "valueType": "string"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "epic_ID",
+       "description": "Identity ID of the game in Epic Games Store.",
+       "valueType": "string"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "igdb_ID",
+       "description": "Identity ID of the game in IGDB.",
+       "valueType": "string"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "title",
+       "description": "Title of the game.",
+       "valueType": "string"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "platform",
+       "description": "Platform source of the row: one or more of ['steam', 'epic', 'igdb'].",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "developers",
+       "description": "Developer or developers of the game.",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "publishers_steam",
+       "description": "Publisher(s) of the game on Steam.",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "publishers_epic",
+       "description": "Publisher(s) of the game on Epic Games Store.",
+       "valueType": "string"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "categories_steam",
+       "description": "Steam categories associated with the game.",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "categories_epic",
+       "description": "Epic Games Store categories associated with the game.",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "categories_igdb",
+       "description": "IGDB categories associated with the game.",
+       "valueType": "array[string]"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "effective_date_steam",
+       "description": "Date when the record or pricing became effective on Steam.",
+       "valueType": "datetime"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "effective_date_epic",
+       "description": "Date when the record or pricing became effective on Epic Games Store.",
+       "valueType": "datetime"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "effective_date_igdb",
+       "description": "Date when the record or pricing became effective on IGDB.",
+       "valueType": "datetime"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "price_steam",
+       "description": "Original price before discount on Steam.",
+       "valueType": "number"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "price_epic",
+       "description": "Original price before discount on Epic Games Store.",
+       "valueType": "number"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "discount_percent_steam",
+       "description": "Discount percentage on Steam (e.g., 0.30 = 30% off).",
+       "valueType": "number"
+     },
+     {
+       "@type": "PropertyValue",
+       "name": "discount_percent_epic",
+       "description": "Discount percentage on Epic Games Store (e.g., 0.30 = 30% off).",
+       "valueType": "number"
+     }
+   ],
+  "distribution": [
+    {
+      "@type": "DataDownload",
+      "name": "Repository (code, documentation, and data artifacts)",
+      "contentUrl": "https://github.com/etherealgloriaw/data-curation-indie-games",
+      "encodingFormat": "application/zip"
+    },
+    {
+      "@type": "DataDownload",
+      "name": "Bronze/Silver/Gold outputs (CSV/Parquet as applicable)",
+      "contentUrl": "https://github.com/etherealgloriaw/data-curation-indie-games/data",
+      "encodingFormat": "CSV"
+    }
+  ],
+  "documentation": [
+    "https://steamspy.com/api.php",
+    "https://partner.steamgames.com/doc/webapi_overview",
+    "https://epicstore-api.readthedocs.io",
+    "https://api-docs.igdb.com"
+  ],
+  "usageInfo": "Redistribution of raw source API payloads may be restricted by respective terms of use. This repository provides curated derivatives and metadata under CC BY 4.0. Cite the project and original sources when publishing results.",
+  "citation": "Wang, G., & Li, M. (2025). Curated Indie Game Dataset (2015–2025). GitHub repository: https://github.com/etherealgloriaw/data-curation-indie-games. CC BY 4.0.",
+  "version": "1.0.0",
+  "dateCreated": "2025-12-02",
+  "provider": {
+    "@type": "Organization",
+    "name": "CS598 Data Curation Project",
+    "url": "https://github.com/etherealgloriaw/data-curation-indie-games"
+  }
 }
+
+
 ```
